@@ -18,6 +18,7 @@ public class Produto {
 	private String nome;
 	private double preco;
 	private String descricao;
+	private String imgUrl;
 	
 	//Construtor sem argumentos
 		public Produto () {
@@ -28,20 +29,23 @@ public class Produto {
 			this.nome = dto.nome();
 			this.preco = dto.preco();
 			this.descricao = dto.descricao();
+			this.imgUrl=dto.imgUrl();
 		}
 		
 		//Construtor com argumentos
-		public Produto(Long id, String nome, double preco, String descricao) {
+		public Produto(Long id, String nome, double preco, String descricao, String imgUrl) {
 			this.id = id;
 			this.nome = nome;
 			this.preco = preco;
 			this.descricao = descricao;
+			this.imgUrl = imgUrl;
 		}
 	
 	
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -63,6 +67,15 @@ public class Produto {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
+	public String getImgURL() {
+		return imgUrl;
+	}
+
+	public void setImgURL(String imgURL) {
+		this.imgUrl = imgURL;
+	}
+	
 	
 	
 	
