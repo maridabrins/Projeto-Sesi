@@ -1,12 +1,21 @@
 package com.sesi.projeto.entities;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.sesi.projeto.dto.ProdutoDTO;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
 
 @Entity
 @Table(name = "tb_produto")
@@ -20,6 +29,22 @@ public class Produto {
 	private String descricao;
 	private String imgUrl;
 	
+	@ManyToMany
+	@JoinTable(name="tb_produto_categoria", joinColumns = @JoinColumn(name="produto_id"), 
+	inverseJoinColumns = @JoinColumn(name="categoria_id"))
+	private Set<Categoria> categorias = new HashSet<>();
+	
+	
+	@OneToMany(mappedBy="id.produto")
+	private Set<ItemDoPedido> itens = new HashSet<>();
+	
+	public Set<ItemDoPedido> getItens(){
+		return itens;
+	}
+	
+	public List<Pedido>getPedido(){
+		return itens.stream().map(x->x.getPedido()).toList();
+	}
 	//Construtor sem argumentos
 		public Produto () {
 			
